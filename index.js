@@ -148,14 +148,15 @@ allBtn.addEventListener("click", showAllGames);
 const descriptionContainer = document.getElementById("description-container");
 
 // use filter or reduce to count the number of unfunded games
-const unfundedGamesCount = GAMES_JSON.reduce((currentCount, game) => {
+const unfundedGames = GAMES_JSON.filter((game) => {
     if (game.pledged < game.goal){
-        return currentCount + 1;
+        return game;
     }
-    else{
-        return currentCount;
-    }
-}, 0);
+    
+});
+
+const unfundedGamesCount = unfundedGames.length;
+
 const unfoundedGreaterThanOne = unfundedGamesCount > 1;
 // create a string that explains the number of unfunded games using the ternary operator
 const unfundedString = `A total of \$${totalMoneyRaised} has been raised for ${GAMES_JSON.length} 
